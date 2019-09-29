@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Book {
 
@@ -28,6 +31,7 @@ public class Book {
 	String book_description;
 
 	@ManyToMany(mappedBy="book")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	List<User> user=new ArrayList<User>();
 	@JoinColumn(name="quantity")
 	

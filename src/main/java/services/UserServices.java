@@ -46,4 +46,9 @@ public class UserServices {
 	{
 		return this.userdaoimpl.verifyUser(email, password);
 	}
+	public void addtocart(int bookid,int userid) {
+		this.userdaoimpl.addtocart(bookid, userid);
+		
+		
+	}
 }

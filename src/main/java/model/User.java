@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class User {
 
@@ -27,6 +30,7 @@ public class User {
 	String contactno;
 	
 	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	List<Book> book = new ArrayList<Book>();
 
 	public int getUser_id() {

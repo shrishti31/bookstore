@@ -81,6 +81,11 @@ public class UserController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/addtocart")
 	
-	
+	public void addtocart(HttpServletRequest req,HttpServletResponse res) {
+		userservices.addtocart(Integer.parseInt(req.getParameter("uid")),Integer.parseInt(req.getParameter("bid")));
+		
+		
+	}
 }

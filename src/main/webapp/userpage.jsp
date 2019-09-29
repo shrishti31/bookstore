@@ -29,5 +29,27 @@
 <input type="submit" value="view">
 </form>
 <%=request.getAttribute("userrr") %>
+
+
+
+
+<form action="addtocart">
+<input type="number" palceholder="enter user id" name="uid">
+<input type="number" placeholder="enter book id" name="bid">
+
+<input type="submit" value="view">
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

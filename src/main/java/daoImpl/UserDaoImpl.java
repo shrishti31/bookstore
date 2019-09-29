@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import dao.UserDao;
+import model.Book;
 import model.User;
 
 public class UserDaoImpl implements UserDao{
@@ -50,6 +51,13 @@ public class UserDaoImpl implements UserDao{
 			IsValidUser=false;
 		
 		return IsValidUser;
+	}
+	public void  addtocart(int bookid, int userid) {
+		// TODO Auto-generated method stub
+		Book book=this.hTemplate.get(Book.class, bookid);
+		User user1=this.hTemplate.get(User.class, userid);
+		user1.getBook().add(book);
+	   this.hTemplate.update(user1);
 	}
 
 	
