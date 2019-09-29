@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+<property name="url" value="jdbc:mysql://localhost:3306/bookstore"></property> 
+<property name="username" value="root"></property>
+<property name="password" value=""></property>
+</bean>
+
+<bean id="mysessionfactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+<property name="dataSource" ref="ds"></property>
+<property name="annotatedClasses">
+<list>
+<value>model.User</value>
+<value>model.Book</value>
+</list>
+</property> 
+
+<property name="hibernateProperties">
+ <props>
+  <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+        <prop key="hibernate.show_sql">true</prop>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+</props>
+</property>
+</bean>
+<bean id="template" class="org.springframework.orm.hibernate3.HibernateTemplate">  
+    <property name="sessionFactory" ref="mysessionfactory"></property>  
+    </bean>
+
+<bean id="userdaoimpl" class="daoImpl.UserDaoImpl">
+<property name="hTemplate" ref="template"></property>
+
+</bean>
+
+
+<bean id="bookdaoimpl" class="daoImpl.BookDaoImpl">
+<property name="hTemplate" ref="template"></property>
+
+</bean>
+
+<bean id="bookservices" class="services.BookServices">
+<property name="bookdaoimpl" ref="bookdaoimpl"></property>
+</bean>
+
+<bean id="userservices" class="services.UserServices">
+<property name="userdaoimpl" ref="userdaoimpl"></property>
+</bean>
+
+<bean id="user" class="model.User">
+</bean>
+
+<bean id="book" class="model.Book">
+</bean>
+
+
+</beans>
